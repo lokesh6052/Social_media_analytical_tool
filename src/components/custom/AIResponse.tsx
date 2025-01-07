@@ -4,7 +4,6 @@ import React from "react";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
@@ -31,30 +30,30 @@ const AIResponse: React.FC<AIResponseProps> = ({ data }) => {
 		);
 		displayData = JSON.stringify(parsedData, null, 2);
 
-		metricsData = Object.entries(parsedData["Metrics Summary"]).map(
+		metricsData = Object.entries(parsedData["metricsSummary"]).map(
 			([post_type, metrics]) => ({
 				post_type,
-				avgLikes: (metrics as any)["Avg. Likes"],
-				avgComments: (metrics as any)["Avg. Comments"],
-				avgShares: (metrics as any)["Avg. Shares"],
+				avgLikes: (metrics as any)["avgLikes"],
+				avgComments: (metrics as any)["avgComments"],
+				avgShares: (metrics as any)["avgShares"],
 			})
 		);
 
-		keyInsights = Object.keys(parsedData["Key Insights"]).filter(
-			(key) => parsedData["Key Insights"][key]
-		);
+		keyInsights = Object.keys(parsedData["keyInsights"]);
+		// .filter(
+		// 	(key, value) => parsedData["keyInsights"]?.[key]?. [value]
+		// );
 	} catch (error) {
 		displayData = "Failed to parse response data.";
 		console.error("Error parsing AI response:", error);
 	}
 
 	return (
-		<Card className='max-w-xl'>
-			<CardHeader>
-				<CardTitle>Create project</CardTitle>
-				<CardDescription>Deploy your new project in one-click.</CardDescription>
+		<Card className='max-w-5xl mt-10'>
+			<CardHeader className='flex justify-between items-center'>
+				<CardTitle className='text-3xl '>AI Response</CardTitle>
 			</CardHeader>
-			<CardContent>
+			<CardContent className='flex items-center justify-center flex-col space-y-4 '>
 				<BarChart chartData={metricsData} keyInsights={keyInsights} />
 				{displayData}
 			</CardContent>{" "}

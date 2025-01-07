@@ -95,7 +95,7 @@ export default function QueryForm() {
 								</FormLabel>
 								<FormControl>
 									<Textarea
-										className='h-42'
+										className='h-52'
 										placeholder='Write your query to find the desired analytical results...'
 										{...field}
 									/>

@@ -4,9 +4,9 @@ import axios from "axios"; // Ensure axios is imported
 export async function runLangflowFlow(message: string): Promise<any> {
 	try {
 		const response = await axios.post(
-			"https://api.langflow.astra.datastax.com/lf/c4ce29ec-367a-4dbd-abc9-1974bd8a10f4/api/v1/run/006dcce4-55c6-4c1a-95df-a6b74a3d5cee?stream=false",
+			"https://api.langflow.astra.datastax.com/lf/c9592b60-963a-48be-99f5-dc1dbd0a922c/api/v1/run/f786c775-0db3-4094-8916-63438f222dba?stream=false",
 			{
-				input_value: `${message}, please give me this response in JSON format and please don't provide any other text. and please give me the other suggestion in their seprate key value pairs. and please provide me the suggestion in a long form paragraph.`,
+				input_value: `${message}, please give me this response in JSON format and please don't provide any other text. and please give me the other suggestion in their seprate key value pairs. and also please gave this : avgLikes, avgComments, avgShares and their key insights and please take the comparision seprately and suggestion seprately`,
 				output_type: "chat",
 				input_type: "chat",
 				tweaks: {

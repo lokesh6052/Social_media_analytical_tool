@@ -45,7 +45,7 @@ const chartConfig = {
 
 export function Component({ chartData, keyInsights }: BarChartProps) {
 	return (
-		<Card>
+		<Card className='max-w-xl mb-10'>
 			<CardHeader>
 				<CardTitle>Average Engagement Analytics</CardTitle>
 				<CardDescription>
