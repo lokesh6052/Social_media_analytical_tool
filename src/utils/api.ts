@@ -6,7 +6,7 @@ export async function runLangflowFlow(message: string): Promise<any> {
 		const response = await axios.post(
 			"https://api.langflow.astra.datastax.com/lf/c4ce29ec-367a-4dbd-abc9-1974bd8a10f4/api/v1/run/006dcce4-55c6-4c1a-95df-a6b74a3d5cee?stream=false",
 			{
-				input_value: `${message}and please give me this response in JSON format`,
+				input_value: `${message}, please give me this response in JSON format and please don't provide any other text. and please give me the other suggestion in their seprate key value pairs. and please provide me the suggestion in a long form paragraph.`,
 				output_type: "chat",
 				input_type: "chat",
 				tweaks: {
