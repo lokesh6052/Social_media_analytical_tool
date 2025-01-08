@@ -19,10 +19,6 @@ export async function POST(request: NextRequest) {
 		const aiResponse = await runLangflowFlow(
 			query.trim() || selectQuery.trim()
 		);
-		console.log(
-			"your AI response: ",
-			aiResponse.outputs?.[0]?.outputs?.[0]?.results?.message?.text
-		);
 
 		return NextResponse.json({ success: true, data: aiResponse });
 	} catch (error: any) {
