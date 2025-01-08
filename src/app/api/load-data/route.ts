@@ -6,7 +6,7 @@ import path from "path";
 export async function POST(request: Request) {
 	const db = await getAstraDBConnection();
 	// console.log(db);
-	const collections = await db?.collection("devorbit");
+	const collections = await db?.collection("posts");
 	console.log(collections);
 
 	//Json Data to be inserted

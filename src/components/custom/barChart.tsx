@@ -80,7 +80,9 @@ export function Component({ chartData, keyInsights }: BarChartProps) {
 			<CardFooter className='flex-col items-start gap-2 text-sm'>
 				{keyInsights.map((insight, index) => (
 					<div key={index} className='flex gap-2 font-medium leading-none'>
-						• {insight} <TrendingUp className='h-4 w-4' />
+						• {insight}
+						<br />
+						<TrendingUp className='h-6 w-6' />
 					</div>
 				))}
 			</CardFooter>
