@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React from "react";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Component as BarChart } from "./barChart";
+import { ChevronRight } from "lucide-react";
 
 type AIResponseProps = {
 	data: any;
@@ -64,9 +59,18 @@ const AIResponse: React.FC<AIResponseProps> = ({ data }) => {
 								{metric.post_type.charAt(0).toUpperCase() +
 									metric.post_type.slice(1)}
 							</h3>
-							<p>Average Likes: {metric.avgLikes}</p>
-							<p>Average Comments: {metric.avgComments}</p>
-							<p>Average Shares: {metric.avgShares}</p>
+							<p className='flex'>
+								<ChevronRight className='w-4 h-4 mt-1' />
+								Average Likes: {metric.avgLikes}
+							</p>
+							<p className='flex'>
+								<ChevronRight className='w-4 h-4 mt-1' />
+								Average Comments: {metric.avgComments}
+							</p>
+							<p className='flex'>
+								<ChevronRight className='w-4 h-4 mt-1' />
+								Average Shares: {metric.avgShares}
+							</p>
 						</li>
 					))}
 				</ul>
@@ -112,25 +116,19 @@ const AIResponse: React.FC<AIResponseProps> = ({ data }) => {
 	}
 
 	return (
-		<Card className='max-w-7xl mt-10'>
+		<Card className='max-w-full mt-10 from-violet-900 to-pink-700 bg-gradient-to-r'>
 			<CardHeader className='flex justify-between items-center'>
-				<CardTitle className='text-3xl '>AI Response</CardTitle>
+				<CardTitle className='text-3xl text-white font-bold'>
+					AI Response
+				</CardTitle>
 			</CardHeader>
-			<CardContent className='flex flex-col items-center justify-center  space-y-4 '>
-				<div>
-					<BarChart
-						chartData={metricsData}
-						keyInsights={Object.values(keyInsights.comparison)}
-					/>
-				</div>
-				<div>
-					<Card className='max-w-3xl ml-10'>{displayData}</Card>
-				</div>
-			</CardContent>{" "}
-			<CardFooter className='flex justify-between'>
-				{" "}
-				<div>Something...</div>{" "}
-			</CardFooter>{" "}
+			<CardContent className='flex flex-col items-center justify-center  space-y-4 py-10'>
+				<BarChart
+					chartData={metricsData}
+					keyInsights={Object.values(keyInsights.comparison)}
+				/>
+				<Card className='max-w-3xl ml-10'>{displayData}</Card>
+			</CardContent>
 		</Card>
 	);
 };

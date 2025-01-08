@@ -71,3 +71,19 @@ body {
 		@apply bg-background text-foreground;
 	}
 }
+
+/* Define custom scrollbar styles */
+::-webkit-scrollbar {
+	width: 6px; /* Width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #25055e; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #742fed;
+	border-radius: 4px;
+}

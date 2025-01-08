@@ -4,19 +4,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { runLangflowFlow } from "@/utils/api";
 export async function POST(request: NextRequest) {
 	try {
-		const { query } = await request.json();
+		const { query, selectQuery } = await request.json();
 
-		if (!query || query.trim().length < 5) {
+		if (!selectQuery || selectQuery.trim().length < 5) {
 			return NextResponse.json(
 				{
 					success: false,
-					message: "Query must be at least 5 characters long.",
+					message: "select Query must be at least 5 characters long.",
 				},
 				{ status: 400 }
 			);
 		}
 
-		const aiResponse = await runLangflowFlow(query.trim());
+		const aiResponse = await runLangflowFlow(
+			query.trim() || selectQuery.trim()
+		);
 		console.log(
 			"your AI response: ",
 			aiResponse.outputs?.[0]?.outputs?.[0]?.results?.message?.text

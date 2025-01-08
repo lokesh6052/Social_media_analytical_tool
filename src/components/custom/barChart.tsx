@@ -81,7 +81,6 @@ export function Component({ chartData, keyInsights }: BarChartProps) {
 				{keyInsights.map((insight, index) => (
 					<div key={index} className='flex gap-2 font-medium leading-none'>
 						• {insight}
-						<br />
 						<TrendingUp className='h-6 w-6' />
 					</div>
 				))}
