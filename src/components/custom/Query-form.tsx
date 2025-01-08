@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +34,17 @@ export default function QueryForm() {
 		},
 	});
 
-	const [aiResponse, setAiResponse] = useState<any>(null);
+	const [aiResponse, setAiResponse] = useState<{
+		outputs?: {
+			outputs?: {
+				results?: {
+					message?: {
+						text?: string;
+					};
+				};
+			}[];
+		}[];
+	} | null>(null);
 	const [loading, setLoading] = useState(false);
 
 	async function onSubmit(data: z.infer<typeof FormSchema>) {

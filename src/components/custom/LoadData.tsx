@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/hooks/use-toast";
 import axios from "axios";
@@ -22,10 +21,10 @@ export default function LoadData() {
 					description: response.data.message || "Failed to load data.",
 				});
 			}
-		} catch (error: any) {
+		} catch (error: unknown) {
 			toast({
 				title: "Error",
-				description: error.response?.data?.message || "An error occurred.",
+				description: axios.isAxiosError(error) && error.response?.data?.message ? error.response.data.message : "An error occurred.",
 			});
 			console.error("Load Data Error:", error);
 		} finally {

@@ -1,7 +1,6 @@
 import axios from "axios"; // Ensure axios is imported
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export async function runLangflowFlow(message: string): Promise<any> {
+export async function runLangflowFlow(message: string): Promise<string> {
 	try {
 		const response = await axios.post(
 			"https://api.langflow.astra.datastax.com/lf/c9592b60-963a-48be-99f5-dc1dbd0a922c/api/v1/run/f786c775-0db3-4094-8916-63438f222dba?stream=false",
@@ -28,11 +27,16 @@ export async function runLangflowFlow(message: string): Promise<any> {
 		);
 
 		return response.data;
-	} catch (error: any) {
-		console.error(
-			"Error communicating with Langflow API:",
-			error.response?.data || error.message
-		);
-		throw new Error(error.response?.data || error.message);
+	} catch (error: unknown) {
+		if (axios.isAxiosError(error)) {
+			console.error(
+				"Error communicating with Langflow API:",
+				error.response?.data || error.message
+			);
+			throw new Error(error.response?.data || error.message);
+		} else {
+			console.error("Unexpected error:", error);
+			throw new Error("Unexpected error occurred");
+		}
 	}
 }

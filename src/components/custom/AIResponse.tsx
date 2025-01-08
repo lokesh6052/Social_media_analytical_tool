@@ -1,12 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Component as BarChart } from "./barChart";
 import { ChevronRight } from "lucide-react";
 
-type AIResponseProps = {
-	data: any;
+export type AIResponseProps = {
+	data: {
+		outputs?: {
+			outputs?: {
+				results?: {
+					message?: {
+						text?: string;
+					};
+				};
+			}[];
+		}[];
+	};
 };
 
 type KeyInsights = {
@@ -32,16 +41,21 @@ const AIResponse: React.FC<AIResponseProps> = ({ data }) => {
 	};
 
 	try {
-		const parsedData = JSON.parse(
-			data.outputs?.[0]?.outputs?.[0]?.results?.message?.text
-		);
+		const messageText = data.outputs?.[0]?.outputs?.[0]?.results?.message?.text;
+		const parsedData = messageText ? JSON.parse(messageText) : {};
+
+		type Metrics = {
+			avgLikes: number;
+			avgComments: number;
+			avgShares: number;
+		};
 
 		metricsData = Object.entries(parsedData["metricsSummary"]).map(
 			([post_type, metrics]) => ({
 				post_type,
-				avgLikes: (metrics as any)["avgLikes"],
-				avgComments: (metrics as any)["avgComments"],
-				avgShares: (metrics as any)["avgShares"],
+				avgLikes: (metrics as Metrics).avgLikes,
+				avgComments: (metrics as Metrics).avgComments,
+				avgShares: (metrics as Metrics).avgShares,
 			})
 		);
 

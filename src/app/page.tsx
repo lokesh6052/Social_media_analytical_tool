@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import AIResponse from "@/components/custom/AIResponse";
+import type { AIResponseProps } from "@/components/custom/AIResponse";
 import { useState } from "react";
 import axios from "axios";
 import {
@@ -48,7 +48,7 @@ export default function QueryForm() {
 		},
 	});
 
-	const [aiResponse, setAiResponse] = useState<any>(null);
+	const [aiResponse, setAiResponse] = useState<AIResponseProps['data'] | null>(null);
 	const [loading, setLoading] = useState(false);
 
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
