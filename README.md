@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# **Social Media Analytical Tool** 🚀  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Unleash the power of AI-driven insights with our Social Media Analytical Tool! This innovative platform combines cutting-edge AI integration via **Langflow** and robust data handling through **DataStax Astra DB**, delivering a seamless experience for analyzing social media trends.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Tech Stack:**  
+- 🧠 **Langflow** for intelligent data analysis.  
+- 🌐 **Next.js** + **TypeScript** for a powerful backend and frontend experience.  
+- 🛠️ **React Hook Form** for a smooth and interactive user experience.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## **Key Features**  
 
-## Learn More
+1. **📊 Effortless Data Loading**:  
+   Pre-loaded data is ready to go! Quickly access and analyze without any setup hassle.  
 
-To learn more about Next.js, take a look at the following resources:
+2. **🔍 Smart Query Selection**:  
+   Choose from pre-defined queries that best fit your analytical needs.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **✍️ Custom Queries, Made Simple**:  
+   Have a unique question in mind? Add it easily with our intuitive text area feature.  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### **How It Works**  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Submit your queries, and let the AI do the heavy lifting! The tool generates dynamic visualizations like **charts** that break down social media metrics, including:  
+- Average likes, shares, and comments.  
+- Post-type performance analysis.  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Get actionable insights in seconds!  
+
+---
+
+### **Langflow Magic**  
+
+Here’s a sneak peek at the flow diagram guiding the AI engine:  
+
+![Langflow Diagram](./public/langflow.png)  
+
+This visual represents how Langflow processes user inputs to produce stunning, data-rich responses that empower better decision-making.  
