@@ -5,7 +5,7 @@ export async function runLangflowFlow(message: string): Promise<string> {
 		const response = await axios.post(
 			"https://api.langflow.astra.datastax.com/lf/c9592b60-963a-48be-99f5-dc1dbd0a922c/api/v1/run/f786c775-0db3-4094-8916-63438f222dba?stream=false",
 			{
-				input_value: `${message}, please give me this response in JSON format and please don't provide any other text. and please give me the other suggestion in their seprate key value pairs. and also please gave this : avgLikes, avgComments, avgShares and their key insights and please take the comparision seprately and suggestion seprately`,
+				input_value: `${message}, please give me this response in a valid JSON format and please don't provide any other paragraph with JSON data and also please don't add much more Unexpected non-whitespace character. and please give me the other suggestion in their seprate key value pairs. and also please gave this : avgLikes, avgComments, avgShares and their key insights and please take the comparision seprately and suggestion seprately`,
 				output_type: "chat",
 				input_type: "chat",
 				tweaks: {

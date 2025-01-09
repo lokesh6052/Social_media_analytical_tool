@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Component as BarChart } from "./barChart";
@@ -42,88 +41,96 @@ const AIResponse: React.FC<AIResponseProps> = ({ data }) => {
 
 	try {
 		const messageText = data.outputs?.[0]?.outputs?.[0]?.results?.message?.text;
-		const parsedData = messageText ? JSON.parse(messageText) : {};
+		const sanitizedText = messageText?.trim();
+		if (
+			sanitizedText &&
+			sanitizedText.startsWith("{") &&
+			sanitizedText.endsWith("}")
+		) {
+			const parsedData = JSON.parse(sanitizedText);
+			type Metrics = {
+				avgLikes: number;
+				avgComments: number;
+				avgShares: number;
+			};
 
-		type Metrics = {
-			avgLikes: number;
-			avgComments: number;
-			avgShares: number;
-		};
+			metricsData = Object.entries(parsedData["metricsSummary"]).map(
+				([post_type, metrics]) => ({
+					post_type,
+					avgLikes: (metrics as Metrics).avgLikes,
+					avgComments: (metrics as Metrics).avgComments,
+					avgShares: (metrics as Metrics).avgShares,
+				})
+			);
 
-		metricsData = Object.entries(parsedData["metricsSummary"]).map(
-			([post_type, metrics]) => ({
-				post_type,
-				avgLikes: (metrics as Metrics).avgLikes,
-				avgComments: (metrics as Metrics).avgComments,
-				avgShares: (metrics as Metrics).avgShares,
-			})
-		);
+			keyInsights = parsedData["keyInsights"] as KeyInsights;
 
-		keyInsights = parsedData["keyInsights"] as KeyInsights;
-
-		displayData = (
-			<div className='py-10 px-10 space-y-10'>
-				<h2 className='text-3xl text-center font-semibold bg-gradient-to-r from-violet-600 to-pink-500 bg-clip-text text-transparent'>
-					Metrics Summary
-				</h2>
-				<ul>
-					{metricsData.map((metric) => (
-						<li key={metric.post_type} className='mb-4'>
-							<h3 className='text-lg font-semibold'>
-								{metric.post_type.charAt(0).toUpperCase() +
-									metric.post_type.slice(1)}
-							</h3>
-							<p className='flex'>
-								<ChevronRight className='w-4 h-4 mt-1' />
-								Average Likes: {metric.avgLikes}
-							</p>
-							<p className='flex'>
-								<ChevronRight className='w-4 h-4 mt-1' />
-								Average Comments: {metric.avgComments}
-							</p>
-							<p className='flex'>
-								<ChevronRight className='w-4 h-4 mt-1' />
-								Average Shares: {metric.avgShares}
-							</p>
-						</li>
-					))}
-				</ul>
-				<h2 className='text-3xl font-semibold bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text text-transparent text-center'>
-					Key Insights
-				</h2>
-				<div>
-					<h3 className='text-xl font-semibold uppercase'>Comparisons:</h3>
+			displayData = (
+				<div className='py-10 px-10 space-y-10'>
+					<h2 className='text-3xl text-center font-semibold bg-gradient-to-r from-violet-600 to-pink-500 bg-clip-text text-transparent'>
+						Metrics Summary
+					</h2>
 					<ul>
-						{keyInsights.comparison &&
-						Object.keys(keyInsights.comparison).length > 0 ? (
-							Object.entries(keyInsights.comparison).map(([key, insight]) => (
-								<li key={key} className='mb-2'>
-									• {insight}
-								</li>
-							))
-						) : (
-							<li>No comparison insights available.</li>
-						)}
+						{metricsData.map((metric) => (
+							<li key={metric.post_type} className='mb-4'>
+								<h3 className='text-lg font-semibold'>
+									{metric.post_type.charAt(0).toUpperCase() +
+										metric.post_type.slice(1)}
+								</h3>
+								<p className='flex'>
+									<ChevronRight className='w-4 h-4 mt-1' />
+									Average Likes: {metric.avgLikes}
+								</p>
+								<p className='flex'>
+									<ChevronRight className='w-4 h-4 mt-1' />
+									Average Comments: {metric.avgComments}
+								</p>
+								<p className='flex'>
+									<ChevronRight className='w-4 h-4 mt-1' />
+									Average Shares: {metric.avgShares}
+								</p>
+							</li>
+						))}
 					</ul>
-					<br />
-					<h3 className='text-xl font-semibold uppercase'>Suggestion:</h3>
-					<ul>
-						{keyInsights.suggestion &&
-						Object.keys(keyInsights.suggestion).length > 0 ? (
-							Object.entries(keyInsights.suggestion).map(
-								([key, suggestion]) => (
+					<h2 className='text-3xl font-semibold bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text text-transparent text-center'>
+						Key Insights
+					</h2>
+					<div>
+						<h3 className='text-xl font-semibold uppercase'>Comparisons:</h3>
+						<ul>
+							{keyInsights.comparison &&
+							Object.keys(keyInsights.comparison).length > 0 ? (
+								Object.entries(keyInsights.comparison).map(([key, insight]) => (
 									<li key={key} className='mb-2'>
-										• {suggestion}
+										• {insight}
 									</li>
+								))
+							) : (
+								<li>No comparison insights available.</li>
+							)}
+						</ul>
+						<br />
+						<h3 className='text-xl font-semibold uppercase'>Suggestion:</h3>
+						<ul>
+							{keyInsights.suggestion &&
+							Object.keys(keyInsights.suggestion).length > 0 ? (
+								Object.entries(keyInsights.suggestion).map(
+									([key, suggestion]) => (
+										<li key={key} className='mb-2'>
+											• {suggestion}
+										</li>
+									)
 								)
-							)
-						) : (
-							<li>No suggestions available.</li>
-						)}
-					</ul>
+							) : (
+								<li>No suggestions available.</li>
+							)}
+						</ul>
+					</div>
 				</div>
-			</div>
-		);
+			);
+		} else {
+			throw new Error("Invalid JSON format");
+		}
 	} catch (error) {
 		displayData = "Failed to parse response data.";
 		console.error("Error parsing AI response:", error);

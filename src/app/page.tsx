@@ -48,7 +48,9 @@ export default function QueryForm() {
 		},
 	});
 
-	const [aiResponse, setAiResponse] = useState<AIResponseProps['data'] | null>(null);
+	const [aiResponse, setAiResponse] = useState<AIResponseProps["data"] | null>(
+		null
+	);
 	const [loading, setLoading] = useState(false);
 
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -61,7 +63,11 @@ export default function QueryForm() {
 				},
 			});
 
+			console.log(response.status);
+
 			const result = await response.data;
+
+			console.log(result);
 
 			if (result.success) {
 				setAiResponse(result.data);

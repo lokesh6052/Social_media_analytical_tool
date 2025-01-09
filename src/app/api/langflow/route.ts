@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { NextRequest, NextResponse } from "next/server";
 import { runLangflowFlow } from "@/utils/api";
 export async function POST(request: NextRequest) {
@@ -20,11 +18,16 @@ export async function POST(request: NextRequest) {
 			query.trim() || selectQuery.trim()
 		);
 
+		console.log(aiResponse);
+
 		return NextResponse.json({ success: true, data: aiResponse });
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("Server-side Langflow API error:", error);
 		return NextResponse.json(
-			{ success: false, message: error.message || "Internal Server Error" },
+			{
+				success: false,
+				message: (error as Error).message || "Internal Server Error",
+			},
 			{ status: 500 }
 		);
 	}
