@@ -140,7 +140,7 @@ export default function QueryForm() {
 											</SelectTrigger>
 										</FormControl>
 										<SelectContent>
-											<SelectItem value='Compare the Reels, static and craousel posts ,and also provide me an amazing time zone to upload the posts for each posts to boost the reach'>
+											<SelectItem value='Compare the posts types'>
 												Compare Reels, Carousel, Static Posts
 											</SelectItem>
 											<SelectItem value='Compare the posts based on the time of upload, like which post is getting more reach in less time and also provide me the best suggestion to boost the reach'>
