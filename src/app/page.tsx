@@ -143,7 +143,7 @@ export default function QueryForm() {
 											<SelectItem value='Compare the posts types'>
 												Compare Reels, Carousel, Static Posts
 											</SelectItem>
-											<SelectItem value='Compare the posts based on the time of upload, like which post is getting more reach in less time and also provide me the best suggestion to boost the reach'>
+											<SelectItem value='Compare the posts based on the time of upload'>
 												Compare with Uploading Date
 											</SelectItem>
 											<SelectItem value='Compare the posts types and also provide me the best suggestion to boost the reach'>
